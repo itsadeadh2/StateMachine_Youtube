@@ -1,24 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayerBaseState : State {
     protected PlayerStateMachine stateMachine;
+    protected PlayerBaseDecider decider;
 
-    public PlayerBaseState(PlayerStateMachine stateMachine) {
+
+    public PlayerBaseState(PlayerStateMachine stateMachine, PlayerBaseDecider decider) {
         this.stateMachine = stateMachine;
+        this.decider = decider;
+    }
+    public override void OnEnter() {
+        decider.OnEnter();
+        decider.OnPlyerStateChangedEvent += OnPlayerStateChanged;
     }
 
-    protected Vector3 CalculateMovement() {
-        Vector3 motion = Vector3.zero;
-        motion.x = stateMachine.InputReader.MovementValue.x;
-        motion.z = stateMachine.InputReader.MovementValue.y;
-        motion *= stateMachine.MoveSpeed;
-        return motion;
+    public override void OnUpdate(float deltaTime) {
+        decider.OnUpdate(deltaTime);
     }
 
-    protected void Move(Vector3 motion, float deltaTime) {
-        motion += stateMachine.ForceReceiver.Movement;
-        stateMachine.Controller.Move(motion * deltaTime);
+    public override void OnExit() {
+        decider.OnExit();
+        decider.OnPlyerStateChangedEvent -= OnPlayerStateChanged;
+    }
+
+    private void OnPlayerStateChanged(PlayerStateMachine.PlayerStates newState) {
+        this.stateMachine.SelectState(newState);
+        return;
     }
 }

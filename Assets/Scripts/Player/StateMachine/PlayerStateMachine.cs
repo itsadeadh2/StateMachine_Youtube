@@ -19,9 +19,17 @@ public class PlayerStateMachine : StateMachine {
 
     void Start() {
         states = new Dictionary<PlayerStates, State>();
+        MovementCalculator movementCalculator = new MovementCalculator();
+        Locomotion locomotion = new Locomotion(ForceReceiver, Controller);
 
-        states.Add(PlayerStates.FreeLook, new PlayerFreeLookState(this));
-        states.Add(PlayerStates.Jump, new PlayerJumpState(this));
+        var playerFreeLookDecider = new PlayerFreeLookDecider(this);
+        var playerJumpDecider = new PlayerJumpDecider(this);
+
+        var playerFreeLookState = new PlayerFreeLookState(this, playerFreeLookDecider, movementCalculator, locomotion);
+        var playerJumpState = new PlayerJumpState(this, playerJumpDecider, movementCalculator, locomotion);
+
+        states.Add(PlayerStates.FreeLook, playerFreeLookState);
+        states.Add(PlayerStates.Jump, playerJumpState);
 
         SelectState(PlayerStates.FreeLook);
     }

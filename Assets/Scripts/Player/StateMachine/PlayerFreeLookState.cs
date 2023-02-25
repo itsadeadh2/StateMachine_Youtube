@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFreeLookState : MonoBehaviour
+public class PlayerFreeLookState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnEnter()
     {
-        
+        Debug.Log("Entered");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnUpdate(float deltaTime)
     {
-        
+        Debug.Log("Updating");
+    }
+
+    public override void OnExit()
+    {
+        Debug.Log("Exited");
     }
 }

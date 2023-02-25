@@ -18,6 +18,9 @@ public class PlayerJumpState : State {
         Debug.Log("PlayerJumpState::OnUpdate");
         Vector3 motion = CalculateMovement();
         motion += stateMachine.ForceReceiver.Movement;
+        if (stateMachine.Controller.isGrounded) {
+            stateMachine.SelectState(PlayerStateMachine.PlayerStates.FreeLook);
+        }
 
         stateMachine.Controller.Move(motion * deltaTime);
 

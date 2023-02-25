@@ -32,4 +32,8 @@ public class PlayerStateMachine : StateMachine {
         if (state == null) return;
         SwitchState(state);
     }
+
+    private void OnGUI() {
+        GUILayout.Label($"<color='yellow'><size=24>Current State:\n<color='yellow'>{currentState}</color></size></color>");
+    }
 }

@@ -819,7 +819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InputReader>k__BackingField: {fileID: 450087112}
   <Controller>k__BackingField: {fileID: 450087107}
-  <ForceReceiver>k__BackingField: {fileID: 0}
+  <ForceReceiver>k__BackingField: {fileID: 450087113}
   <MoveSpeed>k__BackingField: 5
 --- !u!114 &450087112
 MonoBehaviour:
@@ -833,6 +833,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5648d127c30eee942818b6f397db17b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &450087113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450087102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b26b3693b4eb5488db922b12a1f91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 450087107}
 --- !u!1 &602322217
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class PlayerFreeLookState : State {
 
     public override void OnExit() {
         Debug.Log("Exited");
+        stateMachine.InputReader.JumpEvent -= OnJumpPressed;
     }
 
     private Vector3 CalculateMovement() {

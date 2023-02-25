@@ -15,16 +15,16 @@ public class PlayerFreeLookState : State {
         stateMachine.InputReader.JumpEvent += OnJumpPressed;
     }
 
-    public override void OnExit() {
-        Debug.Log("Exited");
-    }
-
     public override void OnUpdate(float deltaTime) {
         Debug.Log("Updating");
 
         Vector3 motion = CalculateMovement();
 
         stateMachine.Controller.Move(motion * deltaTime);
+    }
+
+    public override void OnExit() {
+        Debug.Log("Exited");
     }
 
     private Vector3 CalculateMovement() {
@@ -36,6 +36,6 @@ public class PlayerFreeLookState : State {
     }
 
     private void OnJumpPressed() {
-        stateMachine.switchstate 
+        stateMachine.SelectState(PlayerStateMachine.PlayerStates.Jump);
     }
 }
